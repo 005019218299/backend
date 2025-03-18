@@ -6,9 +6,7 @@ const cors = require('cors');
 app.use(cors()); //npm install cors
 require('dotenv').config();
 const bcrypt = require('bcryptjs'); //npm install bcryptjs
-app.use(cors({
-    origin: 'https://kiemmoney.io.vn'  // Chỉ cho phép truy cập từ example.com
-  }));
+
 const jwt = require('jsonwebtoken'); //npm install jsonwebtoken
 const JWT_SECRET = "nvanvlasoqq09ffhoecnanckadjvdvadvadffeqefvdb425345yu6iujhgfbfvd";
 
