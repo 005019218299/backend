@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose'); //npm install mongoose
 app.use(express.json());
 const cors = require('cors');
-app.use(cors()); //npm install cors
+// app.use(cors()); //npm install cors
 require('dotenv').config();
 const bcrypt = require('bcryptjs'); //npm install bcryptjs
 
@@ -15,6 +15,7 @@ app.use(cors({
     methods: ['GET', 'POST'],  // Phương thức cho phép
     allowedHeaders: ['Content-Type', 'Authorization'],  // Các header cho phép
   }));
+
 const mongoUrl = "mongodb+srv://abcgohan123mam:s3Psqg97pphdJUJz@cluster0.cmq7j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(mongoUrl, {
     useNewUrlParser: true
