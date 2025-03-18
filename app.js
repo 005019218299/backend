@@ -14,6 +14,7 @@ app.use(cors({
     origin: ['https://checkscam.net.vn'],
     methods: ['GET', 'POST', 'OPTIONS'],  // Cho phép phương thức OPTIONS
     allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // Cho phép các cookie được gửi đến server
 }));
 
 // Đảm bảo backend của bạn xử lý preflight requests
