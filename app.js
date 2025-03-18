@@ -3,20 +3,22 @@ const app = express();
 const mongoose = require('mongoose'); //npm install mongoose
 app.use(express.json());
 const cors = require('cors');
-// app.use(cors()); //npm install cors
+app.use(cors()); //npm install cors
 require('dotenv').config();
+
 const bcrypt = require('bcryptjs'); //npm install bcryptjs
 
 const jwt = require('jsonwebtoken'); //npm install jsonwebtoken
 const JWT_SECRET = "nvanvlasoqq09ffhoecnanckadjvdvadvadffeqefvdb425345yu6iujhgfbfvd";
 
-app.use(cors({
-    origin: ['https://checkscam.net.vn'],
-    methods: ['GET', 'POST', 'OPTIONS'],  // Cho phép phương thức OPTIONS
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // Cho phép các cookie được gửi đến server
-}));
-
+const corsOptions = {
+    origin: 'https://checkscam.net.vn', // Cho phép truy cập từ domain này
+    methods: 'GET, POST, PUT, DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+  };
+  
+  app.use(cors(corsOptions)); // Sử dụng middleware CORS với cấu hình trên
+  
 // Đảm bảo backend của bạn xử lý preflight requests
 app.options('*', cors()); // Đảm bảo tất cả các route đều có preflight
 
