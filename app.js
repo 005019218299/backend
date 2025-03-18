@@ -11,10 +11,11 @@ const jwt = require('jsonwebtoken'); //npm install jsonwebtoken
 const JWT_SECRET = "nvanvlasoqq09ffhoecnanckadjvdvadvadffeqefvdb425345yu6iujhgfbfvd";
 
 app.use(cors({
-    origin: 'http://localhost:3001',  // Cho phép yêu cầu từ localhost:3001
-    methods: ['GET', 'POST'],  // Phương thức cho phép
-    allowedHeaders: ['Content-Type', 'Authorization'],  // Các header cho phép
-  }));
+    origin: ['http://localhost:3001'],
+    methods: ['GET', 'POST', 'OPTIONS'],  // Cho phép phương thức OPTIONS
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 // Đảm bảo backend của bạn xử lý preflight requests
 app.options('*', cors()); // Đảm bảo tất cả các route đều có preflight
 
