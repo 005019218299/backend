@@ -10,14 +10,14 @@ const bcrypt = require('bcryptjs'); //npm install bcryptjs
 const jwt = require('jsonwebtoken'); //npm install jsonwebtoken
 const JWT_SECRET = "nvanvlasoqq09ffhoecnanckadjvdvadvadffeqefvdb425345yu6iujhgfbfvd";
 
-// app.use(cors({
-//     origin: ['http://localhost:3001'],
-//     methods: ['GET', 'POST', 'OPTIONS'],  // Cho phép phương thức OPTIONS
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-// }));
+app.use(cors({
+    origin: ['https://checkscam.net.vn'],
+    methods: ['GET', 'POST', 'OPTIONS'],  // Cho phép phương thức OPTIONS
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
-// // Đảm bảo backend của bạn xử lý preflight requests
-// app.options('*', cors()); // Đảm bảo tất cả các route đều có preflight
+// Đảm bảo backend của bạn xử lý preflight requests
+app.options('*', cors()); // Đảm bảo tất cả các route đều có preflight
 
 const mongoUrl = "mongodb+srv://abcgohan123mam:s3Psqg97pphdJUJz@cluster0.cmq7j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(mongoUrl, {
