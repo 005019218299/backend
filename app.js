@@ -15,6 +15,8 @@ app.use(cors({
     methods: ['GET', 'POST'],  // Phương thức cho phép
     allowedHeaders: ['Content-Type', 'Authorization'],  // Các header cho phép
   }));
+// Đảm bảo backend của bạn xử lý preflight requests
+app.options('*', cors()); // Đảm bảo tất cả các route đều có preflight
 
 const mongoUrl = "mongodb+srv://abcgohan123mam:s3Psqg97pphdJUJz@cluster0.cmq7j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(mongoUrl, {
