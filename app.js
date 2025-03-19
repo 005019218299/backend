@@ -5,7 +5,7 @@ app.use(express.json());
 const cors = require('cors');
 app.use(
   cors({
-    origin: "http://localhost:3000", // Chỉ định domain frontend (KHÔNG được dùng "*")
+    origin: "http://localhost:5000", // Chỉ định domain frontend (KHÔNG được dùng "*")
     credentials: true, // Bật cho phép gửi cookie
     methods: ["GET", "POST", "PUT", "DELETE"], // Các phương thức cho phép
     allowedHeaders: ["Content-Type", "Authorization"], // Các header cho phép
