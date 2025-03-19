@@ -5,7 +5,7 @@ app.use(express.json());
 const cors = require('cors');
 app.use(
     cors({
-      origin: "https://khoahoc.tokyo", // Đảm bảo là domain frontend đúng
+      origin:["https://khoahoc.tokyo", "http://localhost:3000"], // Đảm bảo là domain frontend đúng
       credentials: true, // Cho phép gửi cookie
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Phương thức cho phép, bao gồm OPTIONS
       allowedHeaders: ["Content-Type", "Authorization"], // Các header được phép
