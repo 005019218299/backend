@@ -4,13 +4,15 @@ const mongoose = require('mongoose'); //npm install mongoose
 app.use(express.json());
 const cors = require('cors');
 app.use(
-  cors({
-    origin: "http://localhost:5000", // Chỉ định domain frontend (KHÔNG được dùng "*")
-    credentials: true, // Bật cho phép gửi cookie
-    methods: ["GET", "POST", "PUT", "DELETE"], // Các phương thức cho phép
-    allowedHeaders: ["Content-Type", "Authorization"], // Các header cho phép
-  })
-);
+    cors({
+      origin: "http://localhost:3000", // Đảm bảo là domain frontend đúng
+      credentials: true, // Cho phép gửi cookie
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Phương thức cho phép, bao gồm OPTIONS
+      allowedHeaders: ["Content-Type", "Authorization"], // Các header được phép
+    })
+  );
+  app.options('*', cors()); // Xử lý tất cả các OPTIONS request
+
 const bcrypt = require('bcryptjs'); //npm install bcryptjs
 
 const jwt = require('jsonwebtoken'); //npm install jsonwebtoken
