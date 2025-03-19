@@ -8,7 +8,7 @@ app.use(cors({
     methods: ['GET', 'POST'],
     credentials: true
 })); //npm install cors
-require('dotenv').config();
+
 
 const bcrypt = require('bcryptjs'); //npm install bcryptjs
 
