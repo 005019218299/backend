@@ -4,23 +4,23 @@ const mongoose = require('mongoose'); //npm install mongoose
 app.use(express.json());
 const cors = require('cors');
 app.use(
-    cors({
-      origin: "http://localhost:3000", // Chỉ định domain frontend (KHÔNG được dùng "*")
-      credentials: true, // Bật cho phép gửi cookie
-      methods: ["GET", "POST", "PUT", "DELETE"], // Các phương thức cho phép
-      allowedHeaders: ["Content-Type", "Authorization"], // Các header cho phép
-    })
-  );
+  cors({
+    origin: "http://localhost:3000", // Chỉ định domain frontend (KHÔNG được dùng "*")
+    credentials: true, // Bật cho phép gửi cookie
+    methods: ["GET", "POST", "PUT", "DELETE"], // Các phương thức cho phép
+    allowedHeaders: ["Content-Type", "Authorization"], // Các header cho phép
+  })
+);
 const bcrypt = require('bcryptjs'); //npm install bcryptjs
 
 const jwt = require('jsonwebtoken'); //npm install jsonwebtoken
 const JWT_SECRET = "nvanvlasoqq09ffhoecnanckadjvdvadvadffeqefvdb425345yu6iujhgfbfvd";
 
 
+const mongoUrl = "mongodb+srv://abcgohan123mam:Vananh12345@cluster0.cmq7j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const mongoUrl = "mongodb+srv://~abcgohan123mam:s3Psqg97pphdJUJz@cluster0.cmq7j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(mongoUrl, {
-    useUnifiedTopology: true
+   
 })
     .then(() => {
         console.log("Connected to database");
