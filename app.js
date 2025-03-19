@@ -4,7 +4,7 @@ const mongoose = require('mongoose'); //npm install mongoose
 app.use(express.json());
 const cors = require('cors');
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: "*",
     methods: ['GET', 'POST'],
     credentials: true
 })); //npm install cors
