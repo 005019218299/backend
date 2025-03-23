@@ -2,16 +2,18 @@ const express = require('express'); //npm install express
 const app = express();
 const mongoose = require('mongoose'); //npm install mongoose
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
-app.use(
-    cors({
-      origin:["https://khoahoc.tokyo", "http://localhost:3000"], // Đảm bảo là domain frontend đúng
-      credentials: true, // Cho phép gửi cookie
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Phương thức cho phép, bao gồm OPTIONS
-      allowedHeaders: ["Content-Type", "Authorization"], // Các header được phép
-    })
-  );
-  app.options('*', cors()); // Xử lý tất cả các OPTIONS request
+
+
+const corsOptions = {
+    origin: 'http://hanoinew.io.vn/', // Chỉ cho phép domain này
+    methods: 'GET,POST,PUT,DELETE',         // Các phương thức HTTP được phép
+    allowedHeaders: 'Content-Type,Authorization', // Các header được phép
+  };
+  
+  app.use(cors(corsOptions));
+  
 
 const bcrypt = require('bcryptjs'); //npm install bcryptjs
 
@@ -113,38 +115,20 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// app.post("/login", async (req, res) => {
-//     const { email, password } = req.body;
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//         return res.json({ error: "User not found" });
-//     }
-//     if (await bcrypt.compare(password, user.password)) {
-//         const token = jwt.sign({ email: user.email, username: user.username }, JWT_SECRET);
-
-
-//         if (res.status(201)) {
-//             return res.json({ status: "ok", data: token });
-//         } else {
-//             return res.json({ error: "error" });
-//         }
-//     }
-//     return res.json({ status: "error", error: "Invalid Password" });
-
-// });
-
-
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
-
+    console.log("Received request:", req.body);  // Log request data
+    res.send({ express: 'Hello From Express' });
     try {
         const user = await User.findOne({ email });
         if (!user) {
+            res.setHeader("Content-Type", "application/json");
             return res.status(404).json({ error: "User not found" });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
+            res.setHeader("Content-Type", "application/json");
             return res.status(401).json({ error: "Invalid Password" });
         }
 
@@ -152,20 +136,59 @@ app.post("/login", async (req, res) => {
         const token = jwt.sign(
             { email: user.email, username: user.username },
             JWT_SECRET,
-            { expiresIn: "1h" } // Thêm thời gian hết hạn cho token
+            { expiresIn: "1h" }
         );
 
         // Kiểm tra token có tồn tại không
         if (!token) {
+            res.setHeader("Content-Type", "application/json");
             return res.status(500).json({ error: "Token generation failed" });
         }
 
+        res.setHeader("Content-Type", "application/json");
         return res.status(200).json({ status: "ok", data: token });
+
     } catch (error) {
         console.error("Login error:", error);
+        res.setHeader("Content-Type", "application/json");
         return res.status(500).json({ error: "Internal server error" });
     }
 });
+
+
+
+// app.post("/login", async (req, res) => {
+//     const { email, password } = req.body;
+
+//     try {
+//         const user = await User.findOne({ email });
+//         if (!user) {
+//             return res.status(404).json({ error: "User not found" });
+//         }
+
+//         const isPasswordValid = await bcrypt.compare(password, user.password);
+//         if (!isPasswordValid) {
+//             return res.status(401).json({ error: "Invalid Password" });
+//         }
+
+//         // Tạo token
+//         const token = jwt.sign(
+//             { email: user.email, username: user.username },
+//             JWT_SECRET,
+//             { expiresIn: "1h" } // Thêm thời gian hết hạn cho token
+//         );
+
+//         // Kiểm tra token có tồn tại không
+//         if (!token) {
+//             return res.status(500).json({ error: "Token generation failed" });
+//         }
+
+//         return res.status(200).json({ status: "ok", data: token });
+//     } catch (error) {
+//         console.error("Login error:", error);
+//         return res.status(500).json({ error: "Internal server error" });
+//     }
+// });
 
 
 app.post("/userData", async (req, res) => {
